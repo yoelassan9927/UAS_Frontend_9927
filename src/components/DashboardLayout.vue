@@ -4,10 +4,10 @@
  <v-list-item>
  <v-list-item-content>
  <v-list-item-title class="title">
- Nama Kalian
+ Yoel Chrisnanda Assan
  </v-list-item-title>
  <v-list-item-subtitle>
- NPM
+ 180709927
  </v-list-item-subtitle>
  </v-list-item-content>
  </v-list-item>
@@ -39,6 +39,7 @@ data() {
  items: [
  { title: "Dashboard", to: "/" },
  { title: "GD", to: "/gd" },
+ {title: "UGD", to: "/ugd"},
  ],
  };
 },
