@@ -15,44 +15,28 @@
  Tambah
  </v-btn>
  </v-card-title>
-
  <v-data-table :headers="headers" :items="todos" :search="search">
  <template v-slot:[`item.actions`]="{ item }">
-
  <v-btn small class="mr-2" @click="editItem(item)">
  edit
  </v-btn>
-
  <v-btn small @click="deleteItem(item)">
  delete
  </v-btn>
-
  </template>
  </v-data-table>
  </v-card>
-
  <v-dialog v-model="dialog" persistent max-width="600px">
  <v-card>
  <v-card-title>
- <span class="headline"
- v-if="adding == true">
- form form Todo - Add
-</span>
-
-<span class = "headline"
-v-else>
-Form Todo - edit
-</span>
-
+ <span class="headline">Form Todo</span>
  </v-card-title>
-
  <v-card-text>
  <v-container>
  <v-text-field
  v-model="formTodo.task"
  label="Task"
  required
- autofocus
  ></v-text-field>
  <v-select
  v-model="formTodo.priority"
@@ -60,50 +44,34 @@ Form Todo - edit
  label="Priority"
  required
  ></v-select>
-
  <v-textarea
+
  v-model="formTodo.note"
  label="Note"
+ 
  required
  ></v-textarea>
  </v-container>
  </v-card-text>
-
  <v-card-actions>
  <v-spacer></v-spacer>
  <v-btn color="blue darken-1" text @click="cancel">
  Cancel
  </v-btn>
-
- <v-btn v-if="adding == true"
-    volor="blue darken-1"
-    text@click="save">
-    Save
-</v-btn>
-
-<v-btn v-else 
-    color="blue darken-1" 
-    text 
-    @click="edit(formTodo)">
-    Save
-    </v-btn>
-
+ <v-btn color="blue darken-1" text @click="save">
+ Save
+ </v-btn>
  </v-card-actions>
  </v-card>
  </v-dialog>
-
-
  </v-main>
 </template>
-
-
 <script>
 export default {
 name: "List",
 data() {
  return {
  search: null,
- adding: true,
  dialog: false,
  headers: [
  {
@@ -113,7 +81,7 @@ data() {
  value: "task",
  },
  { text: "Priority", value: "priority" },
- { text: "Note", value: "note" },
+
  { text: "Actions", value: "actions" },
  ],
  todos: [
@@ -144,22 +112,11 @@ methods: {
  save() {
  this.todos.push(this.formTodo);
  this.resetForm();
+ this.dialog = false;
  },
  cancel() {
  this.resetForm();
  this.dialog = false;
- this.editItem = null;
- this.adding = true;
- },
-
- deleteItem(item) {
-     this.todos.splice(this.todos.indexOf(item), 1);
- },
-
- editItem(formTodo){
-     this.editItem.task = formTodo.task;
-     this.editItem.note = formTodo.note;
-     this.cancel();
  },
  resetForm() {
  this.formTodo = {

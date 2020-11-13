@@ -87,19 +87,19 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     
-                    <v-btn color="blue darken-1" text @click="cancel">
+                    <v-btn color="blue" text @click="cancel">
                         Cancel
                     </v-btn>
 
                     <v-btn v-if="adding == true" 
-                        color="blue darken-1" 
+                        color="blue" 
                         text 
                         @click="save">
                         Save
                     </v-btn>
 
                     <v-btn v-else 
-                        color="blue darken-1" 
+                        color="blue" 
                         text 
                         @click="edit(formTodo)">
                         Save
@@ -160,7 +160,7 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="red darken-1" text @click="cancel">
+                    <v-btn color="red" text @click="cancel">
                         Close
                     </v-btn>
                 </v-card-actions>
