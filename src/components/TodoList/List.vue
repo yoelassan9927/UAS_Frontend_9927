@@ -43,12 +43,10 @@
  :items="['Penting', 'Biasa', 'Tidak penting']"
  label="Priority"
  required
- ></v-select>
+ ></v-select>git push -f origin master
  <v-textarea
-
  v-model="formTodo.note"
  label="Note"
- 
  required
  ></v-textarea>
  </v-container>
@@ -81,7 +79,7 @@ data() {
  value: "task",
  },
  { text: "Priority", value: "priority" },
-
+ { text: "Note", value: "note" },
  { text: "Actions", value: "actions" },
  ],
  todos: [
