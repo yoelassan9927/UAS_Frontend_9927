@@ -1,6 +1,6 @@
 <template>
     <v-main class="list">
-        <h3 class="text-h3 font-weight-medium mb-5">To Do List UGD</h3>
+        <h3 class="text-h3 font-weight-medium mb-5">To Do List Tugas</h3>
 
         <v-card>
             <v-card-title>
@@ -47,8 +47,22 @@
                      <v-btn small class="mr-2" @click="deleteItem(item)">delete</v-btn>
 
                 </template>
+                <template v-slot:[`item.checkbox`]="{ item }">
+          <input type="checkbox" @change="checking($event, item)">
+       </template>
             </v-data-table>
         </v-card>
+        <br>
+   <v-card>
+        <ul v-for="(data, index) in check" :key="index">
+            <li>
+                {{ data.task }}
+            </li>
+        </ul>
+        <v-card-title>
+        <v-btn v-if="check.length" @click="deleteAll()">Hapus Semua</v-btn>
+        </v-card-title>
+    </v-card>
 
         <v-dialog v-model="history" >
 
@@ -67,13 +81,13 @@
             <v-data-table :headers="headers2" :items="ftodos" :search="search">
                 <template v-slot:[`item.priority`]="{ item }">
                         <td>
-                            <v-card v-if="item.priority == 'Penting'" style="border-color: lightcoral; color: lightcoral; width: fit-content;" outlined>
+                            <v-card v-if="item.priority == 'Penting'" style="border-color: red; color: red; width: fit-content;" outlined>
                                 {{ item.priority }}
                             </v-card>
-                            <v-card v-else-if="item.priority == 'Biasa'" style="border-color: lightblue; color: lightblue; width: fit-content;" outlined>
+                            <v-card v-else-if="item.priority == 'Biasa'" style="border-color: blue; color: blue; width: fit-content;" outlined>
                                 {{ item.priority }}
                             </v-card>
-                            <v-card v-else outlined style="border-color: lightgreen; color: lightgreen; width: fit-content;">
+                            <v-card v-else outlined style="border-color: green; color: green; width: fit-content;">
                                 {{ item.priority }}
                             </v-card>
                         </td>
@@ -185,6 +199,8 @@ export default {
             searchp: "All Priority",
             adding: true,
             edititem: null,
+            check: [],
+            checkbox: false,
             history: false,
             dialog: false,
             dialogdel: false,
@@ -221,6 +237,8 @@ export default {
                     value: "actions", 
                     sortable: false,
                 },
+
+                { text: "", value: "checkbox"},
             ],
 
             headers2: [
@@ -333,7 +351,28 @@ export default {
                 note: null,
             };
         },
+
+        deleteAll() {
+      var i  ;
+        
+
+      
+      for(i in this.check){
+          this.ftodos.push(this.check[i])
+        this.todos.splice(this.check[i], 1)
+      }
+      this.check = []
+   },
+
+
+   checking(event, item) {
+       this.edititem= item;
+      if (event.target.checked){
+          this.check.push(item)
+      } else {
+        this.check.splice(this.check.indexOf(item), 1)
+      }
+   }
     },
 };
 </script>
-
